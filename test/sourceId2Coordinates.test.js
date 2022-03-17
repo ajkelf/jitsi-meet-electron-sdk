@@ -1,13 +1,17 @@
-const sourceId2Coordinates = require('../node_addons/sourceId2Coordinates');
+/* global process */
+
 const assert = require('assert');
 
 
 describe('sourceId2Coordinates', () => {
     describe('native_addon', () => {
         it('returns undefined for fake value', () => {
-            const result = sourceId2Coordinates("foo");
+            if (process.platform === 'win32') {
+                const sourceId2Coordinates = require('../node_addons/sourceId2Coordinates');
+                const result = sourceId2Coordinates("foo");
 
-            assert.equal(undefined, result);
+                assert.equal(undefined, result);
+            }
         });
     });
 });
